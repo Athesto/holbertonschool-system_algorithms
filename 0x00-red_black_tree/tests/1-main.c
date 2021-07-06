@@ -51,19 +51,30 @@ int main(void)
 	rb_tree_t *root;
 	int valid;
 
-	root = valid_rb();
-	rb_tree_print(root);
-	valid = rb_tree_is_valid(root);
-	printf("Is %d valid: %d\n", root->n, valid);
-
 	root = not_valid_rb();
 	rb_tree_print(root);
 	valid = rb_tree_is_valid(root);
 	printf("Is %d valid: %d\n", root->n, valid);
+	printf("Should be: 0\n");
+
+	root = valid_rb();
+	rb_tree_print(root);
+	valid = rb_tree_is_valid(root);
+	printf("Is %d valid: %d\n", root->n, valid);
+	printf("Should be: 1\n");
+
+	root = valid_rb();
+	root->right->n = 97;
+	rb_tree_print(root);
+	valid = rb_tree_is_valid(root);
+	printf("Is %d valid: %d\n", root->n, valid);
+	printf("Should be: 0\n");
 
 	root->color = RED;
 	rb_tree_print(root);
 	valid = rb_tree_is_valid(root);
 	printf("Is %d valid: %d\n", root->n, valid);
+	printf("Should be: 0\n");
+
 	return (EXIT_SUCCESS);
 }
