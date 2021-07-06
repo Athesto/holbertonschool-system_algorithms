@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror -pedantic -std=gnu90
+CFLAGS=-g -Wall -Wextra -Werror -pedantic -std=gnu90
 SRC=$*-*.c tests/$*-main.c tests/rb_tree_print.c
 
 %:
@@ -7,6 +7,6 @@ SRC=$*-*.c tests/$*-main.c tests/rb_tree_print.c
 	$(CC) $(CFLAGS) $(SRC) 
 	betty-doc $(SRC) 1>/dev/null
 	betty-style $(SRC)
-	valgrind -q ./a.out
+	./a.out
 
 1: SRC+=0-*.c
