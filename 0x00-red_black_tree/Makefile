@@ -9,4 +9,4 @@ SRC=$*-*.c tests/$*-main.c tests/rb_tree_print.c
 	betty-style $(SRC)
 	./a.out
 
-1: SRC+=0-*.c
+1 2: SRC+=0-*.c

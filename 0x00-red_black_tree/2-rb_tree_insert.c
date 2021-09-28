@@ -12,7 +12,47 @@
  */
 rb_tree_t *rb_tree_insert(rb_tree_t **tree, int value)
 {
-	(void) tree;
-	(void) value;
+	rb_tree_t *parent, *uncle, *gparent, *runner;
+
+	/* insert into root */
+	if (!*tree)
+	{
+		*tree = rb_tree_node(NULL, value, BLACK);
+		return (*tree);
+	}
+
+	/* append node */
+	runner = *tree;
+	while (runner)
+	{
+		parent = runner;
+		if (runner->n < value)
+			runner = runner->left;
+		else
+			runner = runner->right;
+	}
+	runner = rb_tree_node(parent, value, RED);
+	if (runner->n < parent->n)
+		parent->left = runner;
+	else
+		parent->right = runner;
+
+	return (rb_tree_node(parent, value, BLACK));
+	/* get family */
+	gparent = parent->parent;
+	if (gparent->left != parent)
+		uncle = gparent->left;
+	else
+		uncle = gparent->right;
+
+	/* fix uncle RED */
+	if (parent->color == RED && uncle->color == RED)
+	{
+		parent->color = uncle->color = BLACK;
+		gparent->color = RED;
+		if (gparent->parent == NULL)
+			gparent->color = BLACK;
+		return (runner);
+	}
 	return (NULL);
 }

@@ -5,7 +5,7 @@
 use `make` and the task number ex `0`
 
 ```console
-$ make `0`
+$ make 0
 ```
 
 ## Documentation
